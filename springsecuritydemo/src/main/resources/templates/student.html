@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Staff Page</title>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #f8f8f8;
+        }
+
+
+        #menuButton {
+          position: fixed;
+          top: 15px;
+          left: 15px;
+          padding: 10px 15px;
+          background-color:blue;
+          color:white;
+          border:none;
+          cursor:pointer;
+          border-radius:5px;
+          z-index: 1000;
+        }
+
+
+        #subMenu {
+          display: none;
+          position: fixed;
+          top:0;
+          left:0;
+          background-color:blue;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 50px;
+          width:150px;
+          height:100%;
+          z-index: 999;
+        }
+
+        #subMenu button {
+
+          background-color:blue;
+          color:white;
+          display: block;
+          margin:8px;
+          padding: 5px 10px;
+          width: 100%;
+          border:none;
+          text-align:left;
+        }
+
+
+        .myProfile {
+          text-align: center;
+          font-size: 24px;
+          color: #333;
+          padding: 20px;
+        }
+        h1{width:500px;height:90px;font-size:70px;background-color:blue;color:white;text-align:center;}
+        td{width:250px;height:50px;text-align:left;}
+    </style>
+</head>
+<body>
+
+
+<button id="menuButton" onclick="toggleMenu()">☰ Menu</button>
+
+
+<div id="subMenu">
+    <a href="/viewMarks"><button>View Marks</button></a>
+    <a href="/changePassword"><button>Change Password</button></a>
+    <a href="/login"><button onclick="return confirmLogout()">Logout</button></a>
+</div>
+
+
+<div class="myProfile">
+    <h1>My Profile</h1>
+    <center>
+        <table>
+            <tr><td>Roll No</td><td th:text="':  '+${student.rollno}"></td></tr>
+            <tr><td>Student Name</td><td th:text="':  '+${student.name}"></td></tr>
+            <tr><td>Father / Guardian Name</td><td th:text="':  '+${student.father_name}"></td></tr>
+            <tr><td>Date of Birth</td><td th:text="':  '+${student.dob}"></td></tr>
+            <tr><td>Gender</td><td th:text="':  '+${student.gender}"></td></tr>
+            <tr><td>Age</td><td th:text="':  '+${student.age}"></td></tr>
+            <tr><td>Course Name</td><td th:text="':  '+${student.course}"></td></tr>
+        </table>
+    </center>
+</div>
+
+<script>
+    function toggleMenu() {
+      const menu = document.getElementById("subMenu");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+    function confirmLogout()
+    {
+    return confirm("Are you sure you want to logout ? ");
+    }
+</script>
+
+</body>
+</html>

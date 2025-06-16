@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    body{background-color:magenta;}
+
+    input[type="number"],[type="text"]{height:30px;width:250px;margin:20px;}
+  </style>
+</head>
+<body>
+<br><a href="/staffPage"><button><--Go Back</button></a><br><br>
+<form th:action="@{/addMarks}" th:object="${marks}" method="post">
+  <center>
+    <table>
+      <tr><td>Roll No</td><td ><input type="text" th:field="*{rollno}" required /></td></tr>
+      <tr><td>Tamil </td><td ><input type="number" th:field="*{tamil}" required /></td></tr>
+      <tr><td>English</td><td ><input type="number" th:field="*{english}" required /></td></tr>
+      <tr><td>Organic</td><td ><input type="number" th:field="*{organic}" required /></td></tr>
+      <tr><td>Inorganic</td><td ><input type="number" th:field="*{inorganic}" required/></td></tr>
+      <tr><td>Physical</td><td ><input type="number" th:field="*{physical}" required /></td></tr>
+
+    </table><br><br>
+    <button>Submit</button>
+  </center>
+</form>
+
+</body>
+</html>
