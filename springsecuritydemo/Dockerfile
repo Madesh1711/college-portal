@@ -1,13 +1,14 @@
-#Build stage
-FROM maven:3.8.5-openjdk-17 AS build
-WORKDIR /app
-COPY . .
-RUN mvn clean install
--DskipTests
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:17-jdk-slim
 
-#Run stage
-FROM openjdk:17
+# Set the working directory inside the container
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+
+# Copy the built jar file into the container
+COPY target/*.jar app.jar
+
+# Expose the port the app runs on
 EXPOSE 8080
-ENTRYPOINT ["java" , "-jar" ,"app.jar"]
+
+# Command to run the jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
