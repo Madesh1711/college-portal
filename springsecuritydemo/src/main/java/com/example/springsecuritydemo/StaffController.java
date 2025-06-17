@@ -21,8 +21,10 @@ public class StaffController {
     private StudentRepository studentrepo;
 
     @GetMapping("/staffPage")
-    public String staffHome()
+    public String staffHome(Principal principal , Model model)
     {
+        String currentUser=principal.getName();
+        model.addAttribute("user",currentUser);
         return "staff";
     }
     @GetMapping("/addStudent")

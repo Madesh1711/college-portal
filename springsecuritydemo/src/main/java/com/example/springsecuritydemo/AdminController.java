@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+
 @Controller
 public class AdminController {
     @Autowired
@@ -30,8 +32,10 @@ public class AdminController {
 
 
     @GetMapping("/adminPage")
-            public String adminPage()
+            public String adminPage(Principal principal,Model model)
     {
+        String currentUser=principal.getName();
+        model.addAttribute("user",currentUser);
         return "admin";
     }
 

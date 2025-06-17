@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admin Page</title>
     <style>
@@ -80,8 +80,7 @@
 
 
 <div class="myProfile">
-    Welcome to My Page!<br>
-    This content stays centered even when menu opens.
+    Welcome to Admin Page , <p th:text="${user+' !'}"></p>
 </div>
 
 <script>
