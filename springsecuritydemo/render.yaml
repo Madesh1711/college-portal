@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: college-portal
+    env: java
+    branch: main
+    buildCommand: ./mvnw clean install
+    startCommand: java -jar target/*.jar
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
