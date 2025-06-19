@@ -19,12 +19,15 @@ public class StaffController {
     private EditRequestService editRequestService;
     @Autowired
     private StudentRepository studentrepo;
+    @Autowired
+    private StaffRepository staffrepo;
 
     @GetMapping("/staffPage")
-    public String staffHome(Principal principal , Model model)
+    public String studentHome(Model model,Principal principal)
     {
-        String currentUser=principal.getName();
-        model.addAttribute("user",currentUser);
+        String rollno=principal.getName();
+        Staff staff=staffrepo.findByRollno(rollno);
+        model.addAttribute("staff",staff);
         return "staff";
     }
     @GetMapping("/addStudent")
@@ -43,19 +46,48 @@ public class StaffController {
      return "redirect:/addStudent";
     }
     @GetMapping("/addMarks")
-    public String showAddMarksPage(Model model)
+    public String showAddMarksPage(Model model,Principal principal)
     {
+        String rollno=principal.getName();
+        Staff staff =staffrepo.findByRollno(rollno);
+        model.addAttribute("subject",staff.getSubject());
         model.addAttribute("marks",new Marks());
         return "addMarks";
     }
     @PostMapping("/addMarks")
-    public String addMarks(@ModelAttribute Marks marks)
+    public String addMarks(@ModelAttribute Marks formMarks,Principal principal)
     {
-        int total=marks.getTamil()+marks.getEnglish()+marks.getOrganic()+marks.getInorganic()+marks.getPhysical();
+        String rollno=principal.getName();
+        Staff staff=staffrepo.findByRollno(rollno);
+        String subject=staff.getSubject();
+
+        String sturollno=formMarks.getRollno();
+        Marks existing=marksrepo.findByRollno(sturollno);
+
+        switch (subject)
+        {
+            case "Tamil" :
+                existing.setTamil(formMarks.getTamil());
+                break;
+            case "English" :
+                existing.setEnglish(formMarks.getEnglish());
+                break;
+            case "Organic" :
+                existing.setOrganic(formMarks.getOrganic());
+                break;
+            case "Inorganic" :
+                existing.setInorganic(formMarks.getInorganic());
+                break;
+            case "Physical" :
+                existing.setPhysical(formMarks.getPhysical());
+                break;
+        }
+
+        int total=existing.getTamil()+existing.getEnglish()+existing.getOrganic()+existing.getInorganic()+existing.getPhysical();
         float average=(float)total/5;
-        marks.setTotal(total);
-        marks.setAverage(average);
-        marksrepo.save(marks);
+        existing.setTotal(total);
+        existing.setAverage(average);
+        marksrepo.save(existing);
         return "redirect:/addMarks";
     }
 

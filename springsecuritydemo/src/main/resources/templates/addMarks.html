@@ -13,15 +13,14 @@
 <br><a href="/staffPage"><button><--Go Back</button></a><br><br>
 <form th:action="@{/addMarks}" th:object="${marks}" method="post">
   <center>
-    <table>
-      <tr><td>Roll No</td><td ><input type="text" th:field="*{rollno}" required /></td></tr>
-      <tr><td>Tamil </td><td ><input type="number" th:field="*{tamil}" required /></td></tr>
-      <tr><td>English</td><td ><input type="number" th:field="*{english}" required /></td></tr>
-      <tr><td>Organic</td><td ><input type="number" th:field="*{organic}" required /></td></tr>
-      <tr><td>Inorganic</td><td ><input type="number" th:field="*{inorganic}" required/></td></tr>
-      <tr><td>Physical</td><td ><input type="number" th:field="*{physical}" required /></td></tr>
+      Roll No<input type="text" th:field="*{rollno}" required /><br><br>
+      <div th:if="${subject == 'Tamil'}"> Tamil <input type="number" th:field="*{tamil}" required /></div>
+      <div th:if="${subject == 'English'}">English<input type="number" th:field="*{english}" required /></div>
+      <div th:if="${subject == 'Organic'}">Organic<input type="number" th:field="*{organic}" required /></div>
+        <div th:if="${subject == 'Inorganic'}">Inorganic<input type="number" th:field="*{inorganic}" required/></div>
+          <div th:if="${subject == 'Physical'}">Physical<input type="number" th:field="*{physical}" required /></div>
 
-    </table><br><br>
+    <br><br>
     <button>Submit</button>
   </center>
 </form>

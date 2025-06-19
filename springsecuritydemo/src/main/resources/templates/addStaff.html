@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Staff</title>
+  <style>
+    body{background-color:magenta;}
+    input[type="text"],[type="number"],select{width:200px;height:30px;font-size:18px;margin:15px;}
+    h1{font-size:40px;}
+  </style>
+</head>
+<body>
+<br><a href="/adminPage"><button><--Go Back</button></a><br>
+<form action="/addStaff" method="post">
+  <center>
+    <table>
+      <tr><td><label>Name</label></td>
+        <td><input type="text" name="name"  required/></td></tr>
+      <tr><td><label>Age</label></td>
+        <td><input type="number" name="age"  required/></td></tr>
+      <tr><td><label>Gender</label></td>
+        <td><select name="gender" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Transgender">Transgender</option>
+        </select></td></tr>
+      <tr><td><label>Date of Birth</label></td>
+        <td><input type="text" name="dob"  required/></td></tr>
+      <tr><td><label>Subject</label></td>
+        <td><select name="subject" required>
+          <option value="Tamil">Tamil</option>
+          <option value="English">English</option>
+          <option value="Organic">Organic Chemistry</option>
+          <option value="Inorganic">Inorganic Chemistry</option>
+          <option value="Physical">Physical Chemistry</option>
+        </select></td></tr>
+      <tr><td><label>Roll no </label></td>
+        <td><input type="text" name="rollno"  required/></td></tr>
+    </table><br><br>
+    <button type="submit">Submit</button>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+  </center>
+</form>
+
+</body>
+</html>

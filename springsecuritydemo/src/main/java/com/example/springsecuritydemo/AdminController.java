@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -28,6 +26,8 @@ public class AdminController {
     private EditRequestService editRequestService;
     @Autowired
     private MarksRepository marksrepo;
+    @Autowired
+    private StaffRepository staffrepo;
 
 
 
@@ -89,5 +89,49 @@ public class AdminController {
 
         editRequestService.removeRequest(rollno);
         return "redirect:/editRequest";
+    }
+    @GetMapping("/addStaff")
+    public String addStaff()
+    {
+        return "addStaff";
+    }
+    @PostMapping ("/addStaff")
+    public String add_staf(@ModelAttribute Staff staff,@ModelAttribute User user, @RequestParam String name, @RequestParam String rollno, @RequestParam int age, @RequestParam String subject, @RequestParam String gender, @RequestParam String dob)
+    {
+        staff.setName(name);
+        staff.setAge(age);
+        staff.setSubject(subject);
+        staff.setDob(dob);
+        staff.setGender(gender);
+        staff.setRollno(rollno);
+
+
+        staffrepo.save(staff);
+
+        String password= passwordEncoder.encode(rollno);
+        user.setPassword(password);
+        user.setUsername(rollno);
+        user.setRole("STAFF");
+        userRepo.save(user);
+
+        return "addStaff";
+    }
+
+    @GetMapping("/editStaff")
+    public String showEditPage(@RequestParam(value="rollno",required= false)String rollno,Model model)
+    {
+        if(rollno != null && !rollno.isEmpty())
+        {
+            Staff staff=staffrepo.findByRollno(rollno);
+            model.addAttribute("staff",staff);
+        }
+        return "editStaff";
+    }
+
+    @PostMapping("/editStaff")
+    public String updateStaff(@ModelAttribute Staff staff)
+    {
+        staffrepo.save(staff);
+        return "editStaff";
     }
 }

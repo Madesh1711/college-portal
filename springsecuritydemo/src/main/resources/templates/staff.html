@@ -63,6 +63,8 @@
           color: #333;
           padding: 20px;
         }
+         h1{width:500px;height:90px;font-size:70px;background-color:blue;color:white;text-align:center;}
+        td{width:250px;height:50px;text-align:left;}
     </style>
 </head>
 <body>
@@ -81,9 +83,18 @@
 
 
 <div class="myProfile">
-    Welcome to Staff Page , <p th:text="${user+' !'}"></p>
+    <h1>My Profile</h1>
+    <center>
+        <table>
+            <tr><td>Roll No</td><td th:text="':  '+${staff.rollno}"></td></tr>
+            <tr><td>Staff Name</td><td th:text="':  '+${staff.name}"></td></tr>
+            <tr><td>Date of Birth</td><td th:text="':  '+${staff.dob}"></td></tr>
+            <tr><td>Gender</td><td th:text="':  '+${staff.gender}"></td></tr>
+            <tr><td>Age</td><td th:text="':  '+${staff.age}"></td></tr>
+            <tr><td>Specialization</td><td th:text="':  '+${staff.subject}"></td></tr>
+        </table>
+    </center>
 </div>
-
 <script>
     function toggleMenu() {
       const menu = document.getElementById("subMenu");
