@@ -2,37 +2,106 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Student Add Approvals</title>
     <style>
-        body{background-color:magenta;}
-        td,th{text-align:center;width:170px;height:50px;}
-        th{color:white;font-size:25px;}
-        h1{font-size:50px;color:blue;}
+        body {
+            background-color: magenta;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: blue;
+        }
+
+        td, th {
+            text-align: center;
+            width: 170px;
+            height: 50px;
+        }
+
+        th {
+            color: white;
+            font-size: 25px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        /* ✅ Responsive handling for table overflow */
+        .table-container {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        table {
+            border-collapse: collapse;
+            min-width: 800px; /* prevent shrink on small screens */
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            th, td {
+                font-size: 14px;
+                width: auto;
+                height: auto;
+                padding: 10px;
+            }
+
+            button {
+                width: 100%;
+                max-width: 150px;
+            }
+        }
     </style>
-    <title>Admin Page</title>
 </head>
 <body>
-<br><a href="/adminPage"><button><--Go Back</button></a><br><br>
-<center>
-<h1>Pending Student Approvals</h1>
-<br><br>
-<table>
-    <tr><th>Name</th><th>Age</th><th>Rollno</th><th>Gender</th><th>Date of Birth</th><th>Father Name</th><th>Course</th><th>Action</th></tr>
-    <tr th:each="req : ${requests}">
-        <td th:text="${req.name}"></td>
-        <td th:text="${req.age}"></td>
-        <td th:text="${req.rollno}"></td>
-        <td th:text="${req.gender}"></td>
-        <td th:text="${req.dob}"></td>
-        <td th:text="${req.father_name}"></td>
-        <td th:text="${req.course}"></td>
-        <td>
-            <form th:action="@{'/add_student_request/' + ${req.rollno}}" method="post">
-                <button type="submit">Approve</button>
-            </form>
-        </td>
-    </tr>
-</table><br><br><br>
 
+<br><a href="/adminPage"><button><--Go Back</button></a><br><br>
+
+<center>
+    <h1>Pending Student Approvals</h1>
+    <br><br>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Rollno</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Father Name</th>
+                <th>Course</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="req : ${requests}">
+                <td th:text="${req.name}"></td>
+                <td th:text="${req.age}"></td>
+                <td th:text="${req.rollno}"></td>
+                <td th:text="${req.gender}"></td>
+                <td th:text="${req.dob}"></td>
+                <td th:text="${req.father_name}"></td>
+                <td th:text="${req.course}"></td>
+                <td>
+                    <form th:action="@{'/add_student_request/' + ${req.rollno}}" method="post">
+                        <button type="submit">Approve</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <br><br><br>
 </center>
+
 </body>
 </html>

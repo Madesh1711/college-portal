@@ -2,19 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Marks not updated </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks not updated</title>
     <style>
-        body{background-color:magenta;color:white;}
-        h1,h2{font-size:50px;}
+        body {
+            background-color: magenta;
+            color: white;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-size: 50px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1, h2 {
+                font-size: 32px;
+            }
+
+            button {
+                font-size: 16px;
+                width: 80%;
+                max-width: 200px;
+            }
+        }
     </style>
 </head>
 <body>
-<center>
-    <br><br><br>
-    <h1>Marks not</h1>
-    <h2>updated</h2>
-    <h2>yet</h2><br><br><br>
-    <a href="/studentPage"><button>Check Later</button></a>
-</center>
+
+<br><br><br>
+<h1>Marks not</h1>
+<h2>updated</h2>
+<h2>yet</h2><br><br><br>
+<a href="/studentPage"><button>Check Later</button></a>
+
 </body>
 </html>

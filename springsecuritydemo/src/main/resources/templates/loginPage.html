@@ -2,31 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-        body{background-color:magenta;}
-        h1{font-size:80px;margin:50px;}
-        input[type="text"],[type="password"]{width:230px;height:40px;color:black;margin:30px;}
+        body {
+            background-color: magenta;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border: 1px solid black;
+        }
+
+        h1 {
+            font-size: 80px;
+            margin: 50px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 230px;
+            height: 40px;
+            color: black;
+            margin: 30px;
+        }
+
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 40px;
+                margin: 20px;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                width: 80%;
+                max-width: 300px;
+                margin: 15px;
+            }
+
+            form {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
 <center>
-<form th:action="@{/login}" method="post">
-
+    <form th:action="@{/login}" method="post">
         <h1>The XYZ College</h1>
 
-
-        <input type="text" name="username" placeholder="Username:" required/><br><br>
-        <input type="password" name="password" placeholder="Password:" required/><br><br>
+        <input type="text" name="username" placeholder="Username:" required /><br><br>
+        <input type="password" name="password" placeholder="Password:" required /><br><br>
         <button type="submit">Login</button><br><br>
+
         <div th:if="${param.error}">
             <p style="color:red">Invalid username or password.</p>
         </div>
         <div th:if="${param.logout}">
             <p style="color:green">You have been logged out.</p>
         </div><br><br>
-</form>
-
+    </form>
 </center>
 </body>
 </html>

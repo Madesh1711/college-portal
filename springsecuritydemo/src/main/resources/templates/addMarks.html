@@ -2,27 +2,91 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-  <style>
-    body{background-color:magenta;}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Marks</title>
+    <style>
+        body {
+            background-color: magenta;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    input[type="number"],[type="text"]{height:30px;width:250px;margin:20px;}
-  </style>
+        input[type="number"],
+        input[type="text"] {
+            height: 30px;
+            width: 250px;
+            margin: 20px;
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 8px 16px;
+        }
+
+
+        @media (max-width: 768px) {
+            input[type="number"],
+            input[type="text"] {
+                width: 80%;
+                max-width: 300px;
+            }
+
+            div {
+                width: 90%;
+                text-align: left;
+                padding-left: 10%;
+            }
+
+            button {
+                width: 80%;
+                max-width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-<br><a href="/staffPage"><button><--Go Back</button></a><br><br>
-<form th:action="@{/addMarks}" th:object="${marks}" method="post">
-  <center>
-      Roll No<input type="text" th:field="*{rollno}" required /><br><br>
-      <div th:if="${subject == 'Tamil'}"> Tamil <input type="number" th:field="*{tamil}" required /></div>
-      <div th:if="${subject == 'English'}">English<input type="number" th:field="*{english}" required /></div>
-      <div th:if="${subject == 'Organic'}">Organic<input type="number" th:field="*{organic}" required /></div>
-        <div th:if="${subject == 'Inorganic'}">Inorganic<input type="number" th:field="*{inorganic}" required/></div>
-          <div th:if="${subject == 'Physical'}">Physical<input type="number" th:field="*{physical}" required /></div>
 
-    <br><br>
-    <button>Submit</button>
-  </center>
+<br>
+<a href="/staffPage"><button><--Go Back</button></a><br><br>
+
+<form th:action="@{/addMarks}" th:object="${marks}" method="post">
+    <center>
+        Roll No
+        <input type="text" th:field="*{rollno}" required /><br><br>
+
+        <div th:if="${subject == 'Tamil'}">
+            Tamil
+            <input type="number" th:field="*{tamil}" required />
+        </div>
+
+        <div th:if="${subject == 'English'}">
+            English
+            <input type="number" th:field="*{english}" required />
+        </div>
+
+        <div th:if="${subject == 'Organic'}">
+            Organic
+            <input type="number" th:field="*{organic}" required />
+        </div>
+
+        <div th:if="${subject == 'Inorganic'}">
+            Inorganic
+            <input type="number" th:field="*{inorganic}" required />
+        </div>
+
+        <div th:if="${subject == 'Physical'}">
+            Physical
+            <input type="number" th:field="*{physical}" required />
+        </div>
+
+        <br><br>
+        <button>Submit</button>
+    </center>
 </form>
 
 </body>

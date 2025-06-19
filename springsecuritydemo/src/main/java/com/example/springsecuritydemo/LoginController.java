@@ -76,8 +76,8 @@ public class LoginController {
         String username=principal.getName();
         Student student=studentrepo.findByRollno(username);
         if(student!=null){return "redirect:/studentPage";}
-        if(username.equals("Staff1")){return "redirect:/staffPage";}
-        return  "redirect:/adminPage";
+        if(username.equals("Admin")){return "redirect:/adminPage";}
+        return  "redirect:/staffPage";
 
     }
 
