@@ -21,6 +21,8 @@ public class DefaultAdminLoader {
             admin.setUsername("Admin");
             admin.setPassword(passwordEncoder.encode("Admin")); // auto hash it here
             admin.setRole("ADMIN");
+            admin.setEmail_id("admin@gmail.com");
+            admin.setPhone_no("1234567899");
             userRepo.save(admin);
         }
     }

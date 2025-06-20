@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class StudentRequestService {
+public class StudentAddRequestService {
 
     private final Map<String,Student> pendingRequests = new HashMap<>();
 

@@ -17,13 +17,13 @@ public class AdminController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private StudentRequestService requestService;
+    private StudentAddRequestService requestService;
 
     @Autowired
     private StudentRepository studentrepo;
 
     @Autowired
-    private EditRequestService editRequestService;
+    private StudentEditRequestService studentEditRequestService;
     @Autowired
     private MarksRepository marksrepo;
     @Autowired
@@ -56,6 +56,9 @@ public class AdminController {
         user.setUsername(req.getRollno());
         user.setPassword(passwordEncoder.encode(req.getRollno()));
         user.setRole("STUDENT");
+        user.setPhone_no(req.getPhone_no());
+        user.setEmail_id(req.getEmail_id());
+
         userRepo.save(user);
 
         Marks marks = new Marks();
@@ -76,18 +79,22 @@ public class AdminController {
     @GetMapping("/editRequest")
     public String editRequests(Model model)
     {
-        model.addAttribute("editRequests",editRequestService.getAllRequests());
+        model.addAttribute("editRequests", studentEditRequestService.getAllRequests());
         return "editRequest";
     }
 
     @PostMapping("/edit_student_request/{rollno}")
     public String approveEditedStudent(@PathVariable String rollno)
     {
-        Student req=editRequestService.getRequestByRollNo(rollno);
+        Student req= studentEditRequestService.getRequestByRollNo(rollno);
         studentrepo.save(req);
 
+        User user=userRepo.findByUsername(req.getRollno());
+        user.setPhone_no(req.getPhone_no());
+        user.setEmail_id(req.getEmail_id());
+        userRepo.save(user);
 
-        editRequestService.removeRequest(rollno);
+        studentEditRequestService.removeRequest(rollno);
         return "redirect:/editRequest";
     }
     @GetMapping("/addStaff")
@@ -96,7 +103,7 @@ public class AdminController {
         return "addStaff";
     }
     @PostMapping ("/addStaff")
-    public String add_staf(@ModelAttribute Staff staff,@ModelAttribute User user, @RequestParam String name, @RequestParam String rollno, @RequestParam int age, @RequestParam String subject, @RequestParam String gender, @RequestParam String dob)
+    public String add_staf(@ModelAttribute Staff staff,@ModelAttribute User user, @RequestParam String name, @RequestParam String rollno, @RequestParam int age, @RequestParam String subject, @RequestParam String gender, @RequestParam String dob, @RequestParam String email_id, @RequestParam String phone_no)
     {
         staff.setName(name);
         staff.setAge(age);
@@ -104,7 +111,8 @@ public class AdminController {
         staff.setDob(dob);
         staff.setGender(gender);
         staff.setRollno(rollno);
-
+        staff.setEmail_id(email_id);
+        staff.setPhone_no(phone_no);
 
         staffrepo.save(staff);
 
@@ -112,6 +120,8 @@ public class AdminController {
         user.setPassword(password);
         user.setUsername(rollno);
         user.setRole("STAFF");
+        user.setEmail_id(email_id);
+        user.setPhone_no(phone_no);
         userRepo.save(user);
 
         return "addStaff";
@@ -129,8 +139,12 @@ public class AdminController {
     }
 
     @PostMapping("/editStaff")
-    public String updateStaff(@ModelAttribute Staff staff)
+    public String updateStaff(@ModelAttribute Staff staff,@RequestParam String phone_no,@RequestParam String rollno)
     {
+        User user=userRepo.findByUsername(rollno);
+        user.setPhone_no(phone_no);
+        userRepo.save(user);
+
         staffrepo.save(staff);
         return "editStaff";
     }

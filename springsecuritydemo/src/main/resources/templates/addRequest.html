@@ -5,103 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pending Student Add Approvals</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             background-color: magenta;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             font-family: Arial, sans-serif;
         }
 
         h1 {
-            font-size: 50px;
+            font-size: 36px;
             color: blue;
-        }
-
-        td, th {
             text-align: center;
-            width: 170px;
-            height: 50px;
+            margin-bottom: 30px;
         }
 
-        th {
+        .back-btn {
+            margin-bottom: 20px;
+        }
+
+        .back-btn button {
+            background-color: black;
             color: white;
-            font-size: 25px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        button {
-            padding: 8px 15px;
-            font-size: 14px;
-        }
-
-        /* ✅ Responsive handling for table overflow */
         .table-container {
             overflow-x: auto;
-            width: 100%;
         }
 
         table {
             border-collapse: collapse;
-            min-width: 800px; /* prevent shrink on small screens */
+            width: 100%;
+            min-width: 900px;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: blue;
+            color: white;
+            font-size: 18px;
+        }
+
+        td {
+            font-size: 15px;
+        }
+
+        button {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            background-color: green;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkgreen;
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 32px;
+                font-size: 24px;
             }
 
             th, td {
-                font-size: 14px;
-                width: auto;
-                height: auto;
-                padding: 10px;
+                font-size: 13px;
+                padding: 8px;
             }
 
             button {
+                font-size: 13px;
                 width: 100%;
-                max-width: 150px;
+            }
+
+            .back-btn button {
+                width: 100%;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
 
-<br><a href="/adminPage"><button><--Go Back</button></a><br><br>
+<div class="back-btn">
+    <a href="/adminPage"><button>&larr; Go Back</button></a>
+</div>
 
-<center>
-    <h1>Pending Student Approvals</h1>
-    <br><br>
+<h1>Pending Student Approvals</h1>
 
-    <div class="table-container">
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Rollno</th>
-                <th>Gender</th>
-                <th>Date of Birth</th>
-                <th>Father Name</th>
-                <th>Course</th>
-                <th>Action</th>
-            </tr>
-            <tr th:each="req : ${requests}">
-                <td th:text="${req.name}"></td>
-                <td th:text="${req.age}"></td>
-                <td th:text="${req.rollno}"></td>
-                <td th:text="${req.gender}"></td>
-                <td th:text="${req.dob}"></td>
-                <td th:text="${req.father_name}"></td>
-                <td th:text="${req.course}"></td>
-                <td>
-                    <form th:action="@{'/add_student_request/' + ${req.rollno}}" method="post">
-                        <button type="submit">Approve</button>
-                    </form>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <br><br><br>
-</center>
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Roll No</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Father Name</th>
+            <th>Course</th>
+            <th>Email Address</th>
+            <th>Phone Number</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="req : ${requests}">
+            <td th:text="${req.name}"></td>
+            <td th:text="${req.age}"></td>
+            <td th:text="${req.rollno}"></td>
+            <td th:text="${req.gender}"></td>
+            <td th:text="${req.dob}"></td>
+            <td th:text="${req.father_name}"></td>
+            <td th:text="${req.course}"></td>
+            <td th:text="${req.email_id}"></td>
+            <td th:text="${req.phone_no}"></td>
+            <td>
+                <form th:action="@{'/add_student_request/' + ${req.rollno}}" method="post">
+                    <button type="submit">Approve</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>
+

@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Page</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            min-height: 100vh;
             background-color: #f8f8f8;
+            display: flex;
             flex-direction: column;
+            align-items: center;
         }
 
         #menuButton {
@@ -36,87 +39,92 @@
             top: 0;
             left: 0;
             background-color: blue;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 50px 10px;
-            width: 150px;
+            padding: 60px 20px;
+            width: 200px;
             height: 100%;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
             z-index: 999;
         }
 
         #subMenu button {
             background-color: blue;
             color: white;
-            display: block;
-            margin: 8px 0;
-            padding: 5px 10px;
-            width: 100%;
             border: none;
+            display: block;
+            padding: 10px 15px;
+            width: 100%;
             text-align: left;
+            font-size: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        #subMenu button:hover {
+            background-color: #004080;
         }
 
         .myProfile {
+            margin-top: 100px;
             text-align: center;
-            font-size: 24px;
             color: #333;
             padding: 20px;
-            max-width: 95vw;
+            width: 100%;
         }
 
         h1 {
-            width: 500px;
-            height: 90px;
-            font-size: 70px;
             background-color: blue;
             color: white;
-            text-align: center;
-            margin: auto;
+            padding: 20px;
+            font-size: 48px;
+            margin: 0 auto 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
         }
 
         table {
-            width: 100%;
+            margin: auto;
+            border-collapse: collapse;
+            width: 90%;
             max-width: 600px;
+            background-color: white;
         }
 
         td {
-            width: 250px;
-            height: 50px;
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
             text-align: left;
-            padding: 5px;
+        }
+
+        td:first-child {
+            font-weight: bold;
+            width: 40%;
         }
 
         @media (max-width: 768px) {
             h1 {
-                width: 90%;
-                height: auto;
-                font-size: 32px;
-                padding: 10px;
+                font-size: 28px;
+                padding: 15px;
             }
 
             .myProfile {
-                font-size: 18px;
+                padding: 10px;
             }
 
-            table, td {
-                font-size: 16px;
+            table {
+                font-size: 14px;
                 width: 100%;
             }
 
             td {
                 display: block;
                 width: 100%;
-                text-align: left;
             }
 
-            table tr {
-                display: block;
-                margin-bottom: 10px;
-            }
-
-            table td:nth-child(2) {
-                font-weight: bold;
-                padding-left: 10px;
+            td:first-child {
+                background-color: #f0f0f0;
+                padding-top: 10px;
+                border-top: 1px solid #ccc;
             }
         }
     </style>
@@ -133,17 +141,15 @@
 
 <div class="myProfile">
     <h1>My Profile</h1>
-    <center>
-        <table>
-            <tr><td>Roll No</td><td th:text="':  '+${student.rollno}"></td></tr>
-            <tr><td>Student Name</td><td th:text="':  '+${student.name}"></td></tr>
-            <tr><td>Father / Guardian Name</td><td th:text="':  '+${student.father_name}"></td></tr>
-            <tr><td>Date of Birth</td><td th:text="':  '+${student.dob}"></td></tr>
-            <tr><td>Gender</td><td th:text="':  '+${student.gender}"></td></tr>
-            <tr><td>Age</td><td th:text="':  '+${student.age}"></td></tr>
-            <tr><td>Course Name</td><td th:text="':  '+${student.course}"></td></tr>
-        </table>
-    </center>
+    <table>
+        <tr><td>Roll No</td><td th:text="':  '+${student.rollno}"></td></tr>
+        <tr><td>Student Name</td><td th:text="':  '+${student.name}"></td></tr>
+        <tr><td>Father / Guardian Name</td><td th:text="':  '+${student.father_name}"></td></tr>
+        <tr><td>Date of Birth</td><td th:text="':  '+${student.dob}"></td></tr>
+        <tr><td>Gender</td><td th:text="':  '+${student.gender}"></td></tr>
+        <tr><td>Age</td><td th:text="':  '+${student.age}"></td></tr>
+        <tr><td>Course Name</td><td th:text="':  '+${student.course}"></td></tr>
+    </table>
 </div>
 
 <script>

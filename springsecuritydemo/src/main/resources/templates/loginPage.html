@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             background-color: magenta;
             margin: 0;
@@ -17,60 +21,76 @@
         }
 
         .container {
-            background: white;
-            padding: 30px;
-            border: 1px solid black;
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
-            font-size: 80px;
-            margin: 50px;
+            font-size: 32px;
+            color: black;
+            margin-bottom: 30px;
         }
 
         input[type="text"],
         input[type="password"] {
-            width: 230px;
-            height: 40px;
-            color: black;
-            margin: 30px;
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 16px;
         }
 
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
 
-        @media (max-width: 768px) {
+        button:hover {
+            background-color: #333;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
             h1 {
-                font-size: 40px;
-                margin: 20px;
+                font-size: 24px;
             }
 
-            input[type="text"],
-            input[type="password"] {
-                width: 80%;
-                max-width: 300px;
-                margin: 15px;
-            }
-
-            form {
-                width: 90%;
+            .container {
+                padding: 30px 20px;
             }
         }
     </style>
 </head>
 <body>
-<center>
+<div class="container">
     <form th:action="@{/login}" method="post">
         <h1>The XYZ College</h1>
 
-        <input type="text" name="username" placeholder="Username:" required /><br><br>
-        <input type="password" name="password" placeholder="Password:" required /><br><br>
-        <button type="submit">Login</button><br><br>
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
 
-        <div th:if="${param.error}">
-            <p style="color:red">Invalid username or password.</p>
+        <div th:if="${param.error}" class="message" style="color: red;">
+            Invalid username or password.
         </div>
-        <div th:if="${param.logout}">
-            <p style="color:green">You have been logged out.</p>
-        </div><br><br>
+        <div th:if="${param.logout}" class="message" style="color: green;">
+            You have been logged out.
+        </div>
     </form>
-</center>
+</div>
 </body>
 </html>

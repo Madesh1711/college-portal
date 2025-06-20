@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class EditRequestService {
+public class StudentEditRequestService {
     private Map<String, Student> pendingEditRequests = new HashMap<>();
 
     public void addRequest(Student student) {

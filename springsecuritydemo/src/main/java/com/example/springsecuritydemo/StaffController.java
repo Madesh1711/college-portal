@@ -1,7 +1,6 @@
 package com.example.springsecuritydemo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +15,13 @@ public class StaffController {
     @Autowired
     private MarksRepository marksrepo;
     @Autowired
-    private EditRequestService editRequestService;
+    private StudentEditRequestService studentEditRequestService;
     @Autowired
     private StudentRepository studentrepo;
     @Autowired
     private StaffRepository staffrepo;
+    @Autowired
+    private StudentAddRequestService requestService;
 
     @GetMapping("/staffPage")
     public String studentHome(Model model,Principal principal)
@@ -36,8 +37,7 @@ public class StaffController {
         return "addStudent";
     }
 
-    @Autowired
-    private StudentRequestService requestService;
+
 
     @PostMapping("/add_student_request")
     public String addStudentRequest(@ModelAttribute Student student)
@@ -105,7 +105,7 @@ public class StaffController {
 
     @PostMapping("/submitEditRequest")
     public String submitEditRequest(Student editedStudent) {
-        editRequestService.addRequest(editedStudent);
+        studentEditRequestService.addRequest(editedStudent);
         return "redirect:/editStudent";
     }
 
