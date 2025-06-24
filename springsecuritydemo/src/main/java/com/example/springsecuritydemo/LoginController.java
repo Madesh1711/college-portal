@@ -1,5 +1,6 @@
 package com.example.springsecuritydemo;
 
+import jakarta.servlet.http.HttpSession;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.security.Principal;
+import java.util.Random;
 
 @Controller
 public class LoginController {
@@ -21,6 +23,8 @@ public class LoginController {
     private StudentRepository studentrepo;
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private EmailService emailService;
 
 
 
@@ -50,6 +54,41 @@ public class LoginController {
         }
 
         return "redirect:/login?error=true";
+    }
+
+    public String generateOtp() {
+        return String.valueOf(new Random().nextInt(999999)).format("%06d");
+    }
+
+    @GetMapping("/forgotPassword")
+    public String showVerifyPage()
+    {
+        return "forgotPassword";
+    }
+    @PostMapping("/forgotPassword")
+    public String verifyUser(@RequestParam String username, HttpSession session)
+    {
+        User user=userRepo.findByUsername(username);
+        if(user!=null)
+        {
+            String otp=generateOtp();
+            session.setAttribute("otp",otp);
+            session.setAttribute("username",username);
+            emailService.sendOtp(user.getEmail_id(),otp);
+            return "enter_otp";
+        }
+        return "error_page";
+    }
+
+    @PostMapping("/validate_otp")
+    public String validateOtp(@RequestParam String otp,HttpSession session)
+    {
+        String sessionOtp=(String)session.getAttribute(otp);
+        if(otp.equals(sessionOtp))
+        {
+            return "success_page";
+        }
+        return "otp_error";
     }
 
     @GetMapping("/changePassword")

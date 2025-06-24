@@ -6,126 +6,123 @@
     <title>Student Page</title>
     <style>
         * {
-            box-sizing: border-box;
+          box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            background-color: #f8f8f8;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          background-color: #f8f8f8;
         }
 
         #menuButton {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            padding: 10px 15px;
-            background-color: blue;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 1000;
+          position: fixed;
+          top: 15px;
+          left: 15px;
+          padding: 10px 15px;
+          background-color: blue;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+          z-index: 1000;
         }
 
         #subMenu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: blue;
-            padding: 60px 20px;
-            width: 200px;
-            height: 100%;
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
-            z-index: 999;
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: blue;
+          padding: 60px 20px;
+          width: 200px;
+          height: 100%;
+          box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+          z-index: 999;
         }
 
         #subMenu button {
-            background-color: blue;
-            color: white;
-            border: none;
-            display: block;
-            padding: 10px 15px;
-            width: 100%;
-            text-align: left;
-            font-size: 16px;
-            margin-bottom: 10px;
-            cursor: pointer;
+          background-color: transparent;
+          color: white;
+          border: none;
+          display: block;
+          padding: 10px 15px;
+          width: 100%;
+          text-align: left;
+          font-size: 16px;
+          margin-bottom: 10px;
+          cursor: pointer;
         }
 
         #subMenu button:hover {
-            background-color: #004080;
+          background-color: #004080;
         }
 
         .myProfile {
-            margin-top: 100px;
-            text-align: center;
-            color: #333;
-            padding: 20px;
-            width: 100%;
+          margin-top: 100px;
+          padding: 20px;
+          text-align: center;
         }
 
         h1 {
-            background-color: blue;
-            color: white;
-            padding: 20px;
-            font-size: 48px;
-            margin: 0 auto 30px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
+          font-size: 48px;
+          background-color: blue;
+          color: white;
+          padding: 15px;
+          margin-bottom: 30px;
+          border-radius: 10px;
+        }
+
+        .table-container {
+          overflow-x: auto;
+          max-width: 90%;
+          margin: auto;
         }
 
         table {
-            margin: auto;
-            border-collapse: collapse;
-            width: 90%;
-            max-width: 600px;
-            background-color: white;
+          border-collapse: collapse;
+          margin: auto;
+          min-width: 500px;
+          font-size: 18px;
         }
 
         td {
-            padding: 12px;
-            border-bottom: 1px solid #ccc;
-            text-align: left;
+          padding: 12px;
+          border: 1px solid #ccc;
+          text-align: left;
         }
 
         td:first-child {
-            font-weight: bold;
-            width: 40%;
+          font-weight: bold;
+          background-color: #eee;
+          width: 200px;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 28px;
-                padding: 15px;
-            }
+          h1 {
+            font-size: 28px;
+            padding: 10px;
+          }
 
-            .myProfile {
-                padding: 10px;
-            }
+          #menuButton {
+            font-size: 14px;
+            padding: 8px 12px;
+          }
 
-            table {
-                font-size: 14px;
-                width: 100%;
-            }
+          #subMenu {
+            width: 70%;
+            padding: 30px 15px;
+          }
 
-            td {
-                display: block;
-                width: 100%;
-            }
+          #subMenu button {
+            font-size: 14px;
+            padding: 8px;
+          }
 
-            td:first-child {
-                background-color: #f0f0f0;
-                padding-top: 10px;
-                border-top: 1px solid #ccc;
-            }
+          table {
+            font-size: 16px;
+          }
         }
     </style>
 </head>
@@ -141,25 +138,27 @@
 
 <div class="myProfile">
     <h1>My Profile</h1>
-    <table>
-        <tr><td>Roll No</td><td th:text="':  '+${student.rollno}"></td></tr>
-        <tr><td>Student Name</td><td th:text="':  '+${student.name}"></td></tr>
-        <tr><td>Father / Guardian Name</td><td th:text="':  '+${student.father_name}"></td></tr>
-        <tr><td>Date of Birth</td><td th:text="':  '+${student.dob}"></td></tr>
-        <tr><td>Gender</td><td th:text="':  '+${student.gender}"></td></tr>
-        <tr><td>Age</td><td th:text="':  '+${student.age}"></td></tr>
-        <tr><td>Course Name</td><td th:text="':  '+${student.course}"></td></tr>
-    </table>
+    <div class="table-container">
+        <table>
+            <tr><td>Roll No</td><td th:text="${student.rollno}"></td></tr>
+            <tr><td>Student Name</td><td th:text="${student.name}"></td></tr>
+            <tr><td>Father / Guardian Name</td><td th:text="${student.father_name}"></td></tr>
+            <tr><td>Date of Birth</td><td th:text="${student.dob}"></td></tr>
+            <tr><td>Gender</td><td th:text="${student.gender}"></td></tr>
+            <tr><td>Age</td><td th:text="${student.age}"></td></tr>
+            <tr><td>Course Name</td><td th:text="${student.course}"></td></tr>
+        </table>
+    </div>
 </div>
 
 <script>
     function toggleMenu() {
-        const menu = document.getElementById("subMenu");
-        menu.style.display = (menu.style.display === "block") ? "none" : "block";
+      const menu = document.getElementById("subMenu");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
     }
 
     function confirmLogout() {
-        return confirm("Are you sure you want to logout?");
+      return confirm("Are you sure you want to logout?");
     }
 </script>
 

@@ -69,39 +69,35 @@
           border-radius: 10px;
         }
 
+        .table-container {
+          overflow-x: auto;
+          margin: 0 auto;
+          max-width: 90%;
+        }
+
         table {
           margin: auto;
           font-size: 18px;
-          border-spacing: 15px;
+          border-collapse: collapse;
+          min-width: 500px;
         }
 
         td {
+          padding: 12px;
+          border: 1px solid #ccc;
           text-align: left;
-          padding: 8px;
+        }
+
+        td:first-child {
+          font-weight: bold;
+          background-color: #eee;
+          width: 200px;
         }
 
         @media (max-width: 768px) {
           .myProfile h1 {
             font-size: 28px;
             padding: 10px;
-          }
-
-          table {
-            width: 100%;
-            font-size: 16px;
-          }
-
-          td {
-            display: block;
-            width: 90%;
-            margin: auto;
-            padding: 10px 0;
-            border-bottom: 1px solid #ccc;
-          }
-
-          td:first-child {
-            font-weight: bold;
-            color: #333;
           }
 
           #menuButton {
@@ -138,14 +134,16 @@
 <!-- Profile content -->
 <div class="myProfile">
     <h1>My Profile</h1>
-    <table>
-        <tr><td>Roll No</td><td th:text="':  '+${staff.rollno}"></td></tr>
-        <tr><td>Staff Name</td><td th:text="':  '+${staff.name}"></td></tr>
-        <tr><td>Date of Birth</td><td th:text="':  '+${staff.dob}"></td></tr>
-        <tr><td>Gender</td><td th:text="':  '+${staff.gender}"></td></tr>
-        <tr><td>Age</td><td th:text="':  '+${staff.age}"></td></tr>
-        <tr><td>Specialization</td><td th:text="':  '+${staff.subject}"></td></tr>
-    </table>
+    <div class="table-container">
+        <table>
+            <tr><td>Roll No</td><td th:text="${staff.rollno}"></td></tr>
+            <tr><td>Staff Name</td><td th:text="${staff.name}"></td></tr>
+            <tr><td>Date of Birth</td><td th:text="${staff.dob}"></td></tr>
+            <tr><td>Gender</td><td th:text="${staff.gender}"></td></tr>
+            <tr><td>Age</td><td th:text="${staff.age}"></td></tr>
+            <tr><td>Specialization</td><td th:text="${staff.subject}"></td></tr>
+        </table>
+    </div>
 </div>
 
 <script>
