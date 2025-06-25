@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.security.Principal;
+import java.security.SecureRandom;
 import java.util.Random;
+
+import static org.hibernate.annotations.UuidGenerator.Style.RANDOM;
 
 @Controller
 public class LoginController {
@@ -56,8 +59,10 @@ public class LoginController {
         return "redirect:/login?error=true";
     }
 
-    public String generateOtp() {
-        return String.valueOf(new Random().nextInt(999999)).format("%06d");
+    private static final SecureRandom RANDOM = new SecureRandom();
+    public String generateOtp()
+    {
+        return String.format("%06d",RANDOM.nextInt(100000));
     }
 
     @GetMapping("/forgotPassword")
