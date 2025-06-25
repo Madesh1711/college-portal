@@ -88,12 +88,20 @@ public class LoginController {
     @PostMapping("/validate_otp")
     public String validateOtp(@RequestParam String otp,HttpSession session)
     {
-        String sessionOtp=(String)session.getAttribute(otp);
+        String sessionOtp=(String)session.getAttribute("otp");
         if(otp.equals(sessionOtp))
         {
-            return "loginPage";
+            return "newPassword";
         }
-        return "otp_error";
+        return "enter_otp";
+    }
+    @PostMapping("/newPassword")
+    public String newPassword(@RequestParam String pass,HttpSession session)
+    {
+        String sessionusername=(String)session.getAttribute("username");
+        User user= userRepo.findByUsername(sessionusername);
+        user.setPassword(pass);
+        userRepo.save(user);
     }
 
     @GetMapping("/changePassword")
