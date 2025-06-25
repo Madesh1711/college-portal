@@ -13,7 +13,7 @@ public class EmailService {
     public void sendOtp(String toEmail, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
-        message.setSubject("Your OTP");
+        message.setSubject("Your OTP for changing Password");
         message.setText("Your OTP is: " + otp);
         mailSender.send(message);
     }

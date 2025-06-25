@@ -86,7 +86,7 @@ public class LoginController {
         String sessionOtp=(String)session.getAttribute(otp);
         if(otp.equals(sessionOtp))
         {
-            return "success_page";
+            return "loginPage";
         }
         return "otp_error";
     }
