@@ -77,7 +77,7 @@ public class LoginController {
             emailService.sendOtp(user.getEmail_id(),otp);
             return "enter_otp";
         }
-        return "error_page";
+        return "invalid_username";
     }
 
     @PostMapping("/validate_otp")
