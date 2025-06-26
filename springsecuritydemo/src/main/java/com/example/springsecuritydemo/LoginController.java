@@ -80,9 +80,14 @@ public class LoginController {
             session.setAttribute("otp",otp);
             session.setAttribute("username",username);
             emailService.sendOtp(user.getEmail_id(),otp);
-            return "enter_otp";
+            return "redirect:/enter_otp";
         }
         return "invalid_username";
+    }
+    @GetMapping("/enter_otp")
+    public String showOtpPage()
+    {
+        return "enter_otp";
     }
 
     @PostMapping("/validate_otp")
