@@ -104,9 +104,8 @@ public class LoginController {
     public String newPassword(@RequestParam String pass,HttpSession session)
     {
         String sessionusername=(String)session.getAttribute("username");
-        User user= userRepo.findByUsername(sessionusername);
-        user.setPassword(pass);
-        userRepo.save(user);
+        String password= passwordEncoder.encode(pass);
+        userRepo.updatePassword(sessionusername,password);
         return "redirect:/login";
     }
 

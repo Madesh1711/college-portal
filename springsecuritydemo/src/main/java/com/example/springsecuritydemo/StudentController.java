@@ -11,6 +11,7 @@ import java.security.Principal;
 
 @Controller
 public class StudentController {
+
     @Autowired
     private UserRepository userRepo;
     @Autowired

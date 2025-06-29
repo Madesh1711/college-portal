@@ -11,7 +11,6 @@ import java.security.Principal;
 
 @Controller
 public class StaffController {
-
     @Autowired
     private MarksRepository marksrepo;
     @Autowired

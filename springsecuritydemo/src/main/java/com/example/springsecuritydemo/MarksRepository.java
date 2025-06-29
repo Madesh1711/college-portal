@@ -6,3 +6,8 @@ public interface MarksRepository extends JpaRepository<Marks,String> {
 
     Marks findByRollno(String rollno);
 }
+
+
+
+
+

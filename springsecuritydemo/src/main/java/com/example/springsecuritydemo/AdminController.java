@@ -18,7 +18,6 @@ public class AdminController {
 
     @Autowired
     private StudentAddRequestService requestService;
-
     @Autowired
     private StudentRepository studentrepo;
 
