@@ -108,7 +108,7 @@ public class LoginController {
         User user =userRepo.findByUsername(sessionusername);
         user.setPassword(password);
         userRepo.save(user);
-        return "redirect:/login";
+        return "redirect: /login";
     }
 
     @GetMapping("/changePassword")
