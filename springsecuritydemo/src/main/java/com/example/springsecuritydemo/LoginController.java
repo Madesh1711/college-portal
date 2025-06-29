@@ -105,7 +105,9 @@ public class LoginController {
     {
         String sessionusername=(String)session.getAttribute("username");
         String password= passwordEncoder.encode(pass);
-        userRepo.updatePassword(sessionusername,password);
+        User user =userRepo.findByUsername(sessionusername);
+        user.setPassword(password);
+        userRepo.save(user);
         return "redirect:/login";
     }
 
